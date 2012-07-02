@@ -1,0 +1,24 @@
+<task:Reference
+  xmlns="class:/spiralcraft/data/types/standard/"
+  xmlns:task="class:/spiralcraft/task/"
+  xmlns:jn="class:/java/net/"
+  >
+  <targetURI>LinkedIn.local.xml
+  </targetURI>
+  
+  <chain>
+  
+    <task:Eval>
+      <x>
+        .newSession()
+        { .startAuthSequence([@jn:URI].("http://localhost:8080")).@log("Auth uri: "+.)
+        }
+      
+      </x>
+      
+    </task:Eval>
+
+
+  </chain>
+</task:Reference>
+

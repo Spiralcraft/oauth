@@ -4,7 +4,7 @@
   </info> 
   
   <publications>
-    <artifact name="spiralcraft-oauth" type="package" ext="zip"/>
+    <artifact name="spiralcraft-oauth" type="jar" ext="jar"/>
   </publications> 
   
   <dependencies>

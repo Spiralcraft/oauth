@@ -1,0 +1,16 @@
+<project name="spiralcraft-oauth-test" basedir="." default="test">
+
+  <import file="../build.xml"/>
+  
+  <target name="test">
+ 
+    <devtask
+      codebase=".."
+      exec
+        ="class:/spiralcraft/task/TaskRunner Test
+         "
+    />
+  </target>
+
+                
+</project>

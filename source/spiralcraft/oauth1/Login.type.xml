@@ -1,0 +1,60 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:sec="class:/spiralcraft/security/"
+  >
+
+  <!-- Maps an oauth id to an application principal 
+  -->
+  <fields>
+    <meta:Field>
+      <name>oauthId
+      </name>
+      
+      <type><LSID.type/>
+      </type>
+    </meta:Field>
+  
+    <meta:Field>
+      <name>principalId
+      </name>
+      
+      <type><String.type/>
+      </type>
+    </meta:Field>
+  </fields>
+  
+  <keys>
+    <meta:Key>
+    
+      <fieldList>oauthId
+      </fieldList>
+      
+      <unique>true
+      </unique>
+      
+    </meta:Key>
+  
+    <meta:Key>
+    
+      <name>login
+      </name>
+      
+      <fieldList>principalId
+      </fieldList>
+      
+      <unique>true
+      </unique>
+      
+      <foreignType><sec:Login.type/>
+      </foreignType>
+      
+      <importedKey>
+        <meta:Key>
+          <unique>true</unique>
+          <fieldList>principalId</fieldList>
+        </meta:Key>
+      </importedKey>
+      
+    </meta:Key>
+  </keys>
+</meta:Type>

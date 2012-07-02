@@ -1,21 +1,19 @@
-<project name="spiralcraft-oauth" default="pack" basedir=".">
+<project name="spiralcraft-oauth" default="build" basedir=".">
 
   <property name="module" value="oauth"/>
   <property name="buildVersion" value="0.4.17-dev1"/>
-
-  <property name="publish.resolver.type" value="distrib"/>  
+  
   
   <path id="classpath">
     <pathelement location="lib/spiralcraft-core.jar"/>
     <pathelement location="lib/spiralcraft-json.jar"/>
     <pathelement location="lib/spiralcraft-servlet.jar"/>
-    <pathelement location="lib/servlet-api-2.4.jar"/>
+    <pathelement location="lib/servlet-api.jar"/>
   </path>
 
   <property name="classpath" refid="classpath"/>
   <property name="manifest.class.path" value="spiralcraft-core.jar"/>
   
-  <property name="package.war-lib.file" value="lib/spiralcraft-oauth.jar"/>
       
   <import file="../../build/build-spiralcraft-common.xml"/>
        

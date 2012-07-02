@@ -19,18 +19,10 @@
         </revision>
         
         <notes>
-          <scm:Note>
+          <scm:Note>Initial commit
           </scm:Note>
         </notes>
-        
-        <path>package
-        </path>
-        
-        <resources>
-          <URI>
-          </URI>
-        </resources>
-                
+
       </scm:Change>
 
     </detail>
