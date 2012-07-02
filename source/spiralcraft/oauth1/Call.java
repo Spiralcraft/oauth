@@ -42,8 +42,10 @@ public class Call<Tresult>
   extends Query<Tresult>
 {
 
+  @SuppressWarnings("unused")
   private static final ClassLog log
     =ClassLog.getInstance(Call.class);
+  
   @SuppressWarnings("rawtypes")
   private static HashMap<Class,StringConverter> converterMap
     =new HashMap<Class,StringConverter>();
