@@ -31,6 +31,7 @@ import spiralcraft.vfs.StreamUtil;
 import spiralcraft.vfs.url.URLAccessException;
 import spiralcraft.vfs.url.URLMessage;
 import spiralcraft.log.ClassLog;
+import spiralcraft.log.Level;
 import spiralcraft.net.http.VariableMap;
 
 public class Session
@@ -48,10 +49,13 @@ public class Session
   private String oauthTokenSecret;
   private boolean temporary;
   private URI returnURI;
-  private String oauthId;
+  protected String oauthId;
+  protected Level logLevel;
   
   protected Session(Client client)
-  { this.client=client;
+  { 
+    this.client=client;
+    this.logLevel=client.logLevel;
   }
   
   public void setReturnURI(URI returnURI)
@@ -76,7 +80,9 @@ public class Session
   
   
   public boolean isTokenValid()
-  { return oauthToken!=null && !temporary;
+  { 
+    // Incorp timeout
+    return oauthToken!=null && !temporary;
   }
   
   /**
@@ -119,7 +125,9 @@ public class Session
     connection.addRequestProperty("Connection","close");
     connection.setUseCaches(false);
     String oauthHeader=oauthHeader(credentialRequestParams);
-    log.fine("oauthHeader: "+oauthHeader);
+    if (logLevel.isFine())
+    { log.fine("oauthHeader: "+oauthHeader);
+    }
     connection.addRequestProperty
       ("Authorization"
       ,oauthHeader
@@ -136,7 +144,9 @@ public class Session
       String ret=new String(bytes);
       VariableMap resultProperties=VariableMap.fromUrlEncodedString(ret);
     
-      log.fine(ret);
+      if (logLevel.isFine())
+      { log.fine(ret);
+      }
     
       // Read x-form-urlencoded response body
       this.oauthToken=resultProperties.getFirst("oauth_token");
@@ -244,7 +254,9 @@ public class Session
     connection.addRequestProperty("Connection","close");
     connection.setUseCaches(false);
     String oauthHeader=oauthHeader(tokenRequestParams);
-    log.fine("oauthHeader: "+oauthHeader);
+    if (logLevel.isFine())
+    { log.fine("oauthHeader: "+oauthHeader);
+    }
     connection.addRequestProperty
       ("Authorization"
       ,oauthHeader
@@ -261,7 +273,9 @@ public class Session
       String ret=new String(bytes);
       VariableMap resultProperties=VariableMap.fromUrlEncodedString(ret);
     
-      log.fine(ret);
+      if (logLevel.isFine())
+      { log.fine(ret);
+      }
     
       // Read x-form-urlencoded response body
       this.oauthToken=resultProperties.getFirst("oauth_token");
@@ -425,7 +439,9 @@ public class Session
         =(HttpURLConnection) 
            new URL(uri.toString()).openConnection();
       connection.setRequestMethod(verb);
-      log.fine("header for "+uri+": "+header);
+      if (logLevel.isFine())
+      { log.fine("header for "+uri+": "+header);
+      }
       connection.addRequestProperty
         ("Authorization"
         ,header

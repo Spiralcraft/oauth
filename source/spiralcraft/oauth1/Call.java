@@ -51,7 +51,7 @@ public class Call<Tresult>
     =new HashMap<Class,StringConverter>();
 
   
-  private Reflector<Client> clientReflector
+  protected Reflector<Client> clientReflector
     =BeanReflector.getInstance(Client.class);
   private Channel<Session> sessionChannel;
   private Client client;
@@ -75,7 +75,7 @@ public class Call<Tresult>
   }
   
   @Override
-  public Focus<?> bindExports(Focus<?> exportChain)
+  protected Focus<?> bindExports(Focus<?> exportChain)
     throws ContextualException
   {
     if (uriQueryBindings!=null)
@@ -101,7 +101,7 @@ public class Call<Tresult>
 
   }  
   
-  class OAuthReadOperation
+  protected class OAuthReadOperation
     extends GetOperation
   {
     

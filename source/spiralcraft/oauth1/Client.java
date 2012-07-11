@@ -18,6 +18,7 @@ import java.net.URI;
 
 import spiralcraft.lang.Reflector;
 import spiralcraft.lang.reflect.BeanReflector;
+import spiralcraft.log.Level;
 
 
 /**
@@ -41,6 +42,8 @@ public class Client
   URI tokenInvalidateURI;
   String signatureMethod;
   URI apiURI;
+  Level logLevel=Level.INFO;
+  
   protected Reflector<Session> sessionReflector
     =BeanReflector.<Session>getInstance(Session.class);
   
@@ -102,6 +105,10 @@ public class Client
   
   public Session newSession()
   { return new Session(this);
+  }
+  
+  public void setLogLevel(Level logLevel)
+  { this.logLevel=logLevel;
   }
   
 }

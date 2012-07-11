@@ -28,11 +28,14 @@ import javax.crypto.spec.SecretKeySpec;
 
 import spiralcraft.codec.text.Base64Codec;
 import spiralcraft.log.ClassLog;
+import spiralcraft.log.Level;
 import spiralcraft.net.http.VariableMap;
 
 public class Signer
 {
   private static final ClassLog log=ClassLog.getInstance(Signer.class);
+  private static Level logLevel
+    =ClassLog.getInitialDebugLevel(Signer.class,Level.INFO);
   private static final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
   
   
@@ -40,7 +43,9 @@ public class Signer
     (String base,String clientSecret,String tokenSecret) 
     throws GeneralSecurityException
   {
-    log.fine("Signing: "+base);
+    if (logLevel.isFine())
+    { log.fine("Signing: "+base);
+    }
     String key
       =(clientSecret!=null?percentEncode(clientSecret):"")
       +"&"
