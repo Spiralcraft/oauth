@@ -29,8 +29,8 @@
       <fieldList>oauthId
       </fieldList>
       
-      <unique>true
-      </unique>
+      <primary>true
+      </primary>
       
     </meta:Key>
   
