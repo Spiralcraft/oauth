@@ -517,7 +517,9 @@ public class Session
   
   public void invalidate()
     throws IOException
-  { call("GET",client.tokenInvalidateURI,null);
+  { 
+    call("GET",client.tokenInvalidateURI,null);
+    clear();
   }
   
   public void clear()
