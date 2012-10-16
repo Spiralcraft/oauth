@@ -15,6 +15,21 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev2
+        </revision>
+        
+        <notes>
+          <scm:Note>Clear the session after calling the invalidate
+            endpoint.
+          </scm:Note>
+        </notes>
+        
+        <path>source/spiralcraft/oauth1/Session.java
+        </path>
+
+      </scm:Change>
+
+      <scm:Change>
         <revision>-dev1
         </revision>
         
