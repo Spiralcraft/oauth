@@ -1,7 +1,7 @@
 <project name="spiralcraft-oauth" default="build" basedir=".">
 
   <property name="module" value="oauth"/>
-  <property name="buildVersion" value="0.4.17-dev2"/>
+  <property name="buildVersion" value="0.4.17-dev3"/>
   
   
   <path id="classpath">

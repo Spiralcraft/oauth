@@ -15,6 +15,45 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev3
+        </revision>
+        
+        <notes>
+          <scm:Note>Fix issue where embedded query parameters are lost in the 
+            referer parameter.
+          </scm:Note>
+          <scm:Note>Added basic error callback handling
+          </scm:Note>
+        </notes>
+        
+        <path>source/spiralcraft/oauth1
+        </path>
+        
+        <resources>
+          <URI>Filter.java
+          </URI>
+          <URI>Session.java
+          </URI>
+        </resources>
+
+      </scm:Change>
+
+      <scm:Change>
+        <revision>-dev3
+        </revision>
+        
+        <notes>
+          <scm:Note>Provide for extensions adding parameters to the 
+            credential request URI
+          </scm:Note>
+        </notes>
+        
+        <path>source/spiralcraft/oauth1/Client.java
+        </path>
+
+      </scm:Change>
+
+      <scm:Change>
         <revision>-dev2
         </revision>
         
