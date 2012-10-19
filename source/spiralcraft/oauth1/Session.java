@@ -51,6 +51,7 @@ public class Session
   private URI returnURI;
   protected String oauthId;
   protected Level logLevel;
+  private String problem;
   
   protected Session(Client client)
   { 
@@ -95,6 +96,7 @@ public class Session
   public URI startAuthSequence(URI callbackURI) 
     throws IOException,GeneralSecurityException
   {
+    problem=null;
     temporary=true;
     VariableMap credentialRequestParams
       =makeCredentialRequestParameters(callbackURI);
@@ -104,7 +106,7 @@ public class Session
       ,Signer.signHMAC_SHA1
         (Signer.signatureBase
           (client.credentialRequestVerb
-          ,client.credentialRequestURI
+          ,client.getCredentialRequestURI()
           ,credentialRequestParams
           ,null
           )
@@ -115,7 +117,7 @@ public class Session
     // Call credentialRequestURI
     HttpURLConnection connection
       =(HttpURLConnection) 
-         new URL(client.credentialRequestURI.toString()).openConnection();
+         new URL(client.getCredentialRequestURI().toString()).openConnection();
     
     connection.setRequestMethod(client.credentialRequestVerb);
     connection.addRequestProperty("Content-Length","0");
@@ -189,6 +191,14 @@ public class Session
     finally
     { connection.disconnect();
     }
+  }
+  
+  public String getProblem()
+  { return problem;
+  }
+  
+  public void abortAuthSequence(String failureCode)
+  { this.problem=failureCode;
   }
   
   /**
@@ -528,5 +538,6 @@ public class Session
     oauthTokenSecret=null;
     temporary=false;
     returnURI=null;
+    problem=null;
   }
 }

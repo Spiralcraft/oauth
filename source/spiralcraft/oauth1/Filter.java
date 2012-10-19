@@ -47,6 +47,7 @@ public class Filter
   protected ThreadLocalChannel<Session> channel;
   protected Channel<HttpServletRequest> requestChannel;
   private URI authSuccessLocation=URI.create("success");
+  private URI authFailureLocation=URI.create("failure");
         
   { setUsesRequest(true);
   }
@@ -86,6 +87,7 @@ public class Filter
   }
   
 
+  
   /**
    * Start the authentication sequence and return to the specified URI 
    *   when complete 
@@ -95,16 +97,20 @@ public class Filter
    */
   public URI startAuthSequence(String callbackURIString)
   {
-    
+    if (debug)
+    { log.fine("Callback URI is "+callbackURIString);
+    }
     URI callbackURI=URI.create(callbackURIString);
     String state=null;
     String referer=null;
-    if (callbackURI.getQuery()!=null)
+    if (callbackURI.getRawQuery()!=null)
     { 
-      state=callbackURI.getQuery();
+      state=callbackURI.getRawQuery();
       VariableMap params=VariableMap.fromUrlEncodedString(state);
       referer=params.getFirst("referer");
-      
+      if (debug)
+      { log.fine("Referer parameter = "+referer);
+      }
     }
 
     Session session
@@ -178,6 +184,33 @@ public class Filter
     return redirectURI;
   }
   
+  public URI abortAuthSequence(VariableMap query)
+  {
+    HttpServletRequest request
+      =requestChannel.get();
+    
+    if (debug)
+    { log.fine("Got abort response "+request.getRequestURI()+"?"+request.getQueryString());
+    }
+    
+    String problem=query.getValue("oauth_problem");
+
+    Session session
+      =this.<Session>getPrivateSessionState
+        (requestChannel.get(),true);
+    
+    session.abortAuthSequence(problem);
+        
+    URI redirectURI=session.getReturnURI();
+    if (redirectURI==null && authFailureLocation!=null)
+    { redirectURI=authFailureLocation;
+    }
+    if (redirectURI==null)
+    { return URI.create("/");
+    }
+    return redirectURI;
+  }
+
   public void logout()
   {
     Session session
