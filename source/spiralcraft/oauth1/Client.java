@@ -30,10 +30,11 @@ import spiralcraft.log.Level;
 public class Client
 {
   
+  private URI credentialRequestURI;
+
   String clientId;
   String realm;
   String sharedSecret;
-  URI credentialRequestURI;
   String credentialRequestVerb="POST";
   URI authorizationURI;
   URI tokenRequestURI;
@@ -69,6 +70,10 @@ public class Client
    */
   public void setSharedSecret(String sharedSecret)
   { this.sharedSecret=sharedSecret;
+  }
+  
+  public URI getCredentialRequestURI()
+  { return credentialRequestURI;
   }
   
   public void setCredentialRequestURI(URI credentialRequestURI)
