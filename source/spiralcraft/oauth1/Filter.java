@@ -48,6 +48,7 @@ public class Filter
   protected Channel<HttpServletRequest> requestChannel;
   private URI authSuccessLocation=URI.create("success");
   private URI authFailureLocation=URI.create("failure");
+  private boolean invalidateOnLogout=false;
         
   { setUsesRequest(true);
   }
@@ -61,6 +62,10 @@ public class Filter
    */
   public void setAuthSuccessLocation(URI authSuccessLocation)
   { this.authSuccessLocation=authSuccessLocation;
+  }
+  
+  public void setInvalidateOnLogout(boolean invalidateOnLogout)
+  { this.invalidateOnLogout=invalidateOnLogout;
   }
   
   /**
@@ -221,7 +226,13 @@ public class Filter
     }
 
     try
-    { session.invalidate();
+    { 
+      if (invalidateOnLogout)
+      { session.invalidate();
+      }
+      else
+      { session.clear();
+      }
     }
     catch (IOException x)
     { log.log(Level.WARNING,"Error on logout",x);
