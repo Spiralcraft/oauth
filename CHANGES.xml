@@ -15,6 +15,21 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev4
+        </revision>
+        
+        <notes>
+          <scm:Note>Make invalidation of oauth token optional on logout,
+            defaulting to false.
+          </scm:Note>
+        </notes>
+        
+        <path>source/spiralcraft/oauth1/Filter.java
+        </path>
+        
+      </scm:Change>
+
+      <scm:Change>
         <revision>-dev3
         </revision>
         
