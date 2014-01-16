@@ -96,6 +96,7 @@ public class Call<Tresult>
     {
       case GET:
         return new OAuthReadOperation();
+      default:
     }
     return super.resolveOperation(type);
 
