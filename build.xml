@@ -1,5 +1,6 @@
 <project name="spiralcraft-oauth" default="build" basedir=".">
 
+  <property name="organization" value="spiralcraft"/>
   <property name="module" value="oauth"/>
   <property name="buildVersion" value="0.4.17-dev4"/>
   <property name="build.status" value="milestone"/>
@@ -14,7 +15,9 @@
   <property name="classpath" refid="classpath"/>
   <property name="manifest.class.path" value="spiralcraft-core.jar"/>
   
+  <property name="depends.dir" location="../../repo"/>
+  <property file="../../build.local/build.properties"/>
       
-  <import file="../../build/build-spiralcraft-common.xml"/>
+  <import file="../../build/build-common.xml"/>
        
 </project>
