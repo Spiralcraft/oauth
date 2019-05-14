@@ -2,8 +2,12 @@
 
   <property name="organization" value="spiralcraft"/>
   <property name="module" value="oauth"/>
-  <property name="buildVersion" value="0.4.17-dev4"/>
-  <property name="build.status" value="milestone"/>
+  <property file="version.properties"/>
+  
+  <property name="depends.dir" location="../../repo"/>
+  
+  <property name="spiralcraft.javac.target" value="1.8"/>
+  <property name="spiralcraft.javac.source" value="1.8"/>
   
   <path id="classpath">
     <pathelement location="lib/spiralcraft-core.jar"/>
@@ -15,7 +19,6 @@
   <property name="classpath" refid="classpath"/>
   <property name="manifest.class.path" value="spiralcraft-core.jar"/>
   
-  <property name="depends.dir" location="../../repo"/>
   <property file="../../build.local/build.properties"/>
       
   <import file="../../build/build-common.xml"/>

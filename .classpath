@@ -9,4 +9,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/spiralcraft-modules-servlet"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/spiralcraft-modules-core"/>
 	<classpathentry kind="output" path="bin"/>
+	<referencedentry kind="lib" path="lib/spiralcraft-core.jar" sourcepath="/spiralcraft-modules-core/source"/>
 </classpath>

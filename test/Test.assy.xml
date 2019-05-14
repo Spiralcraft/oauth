@@ -11,7 +11,7 @@
     <task:Eval>
       <x>
         .newSession()
-        { .startAuthSequence([@jn:URI].("http://localhost:8080")).@log("Auth uri: "+.)
+        { .startAuthSequence([@jn:URI].("https://localhost:8443")).@log("Auth uri: "+.)
         }
       
       </x>

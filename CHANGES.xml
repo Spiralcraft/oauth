@@ -15,6 +15,31 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev5
+        </revision>
+        
+        <notes>
+          <scm:Note>Add oauth2 API and flow
+          </scm:Note>
+        </notes>
+        
+        <path>source/spiralcraft/oauth2
+        </path>
+        
+        <resources>
+          <URI>AccessTokenResponse.java
+          </URI>
+          <URI>Call.java
+          </URI>
+          <URI>Client.java
+          </URI>
+          <URI>Filter.java
+          </URI>
+          <URI>Session.java
+          </URI>
+        </resources>
+      </scm:Change>
+      <scm:Change>
         <revision>-dev4
         </revision>
         
