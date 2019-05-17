@@ -178,15 +178,21 @@ public class Filter
     { log.log(Level.WARNING,"OAuth failure",x);
     }
     
+    if (session.isTokenValid())
+    {
+      URI redirectURI=session.getReturnURI();
+      if (redirectURI==null && authSuccessLocation!=null)
+      { redirectURI=authSuccessLocation;
+      }
+      if (redirectURI==null)
+      { return URI.create("/");
+      }
+      return redirectURI;
+    }
+    else
+    { return authFailureLocation;
+    }
     
-    URI redirectURI=session.getReturnURI();
-    if (redirectURI==null && authSuccessLocation!=null)
-    { redirectURI=authSuccessLocation;
-    }
-    if (redirectURI==null)
-    { return URI.create("/");
-    }
-    return redirectURI;
   }
   
   public URI abortAuthSequence(VariableMap query)

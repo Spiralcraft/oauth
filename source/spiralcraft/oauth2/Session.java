@@ -177,9 +177,16 @@ public class Session
     byte[] encodedTokenRequest
       =StringUtil.asciiBytes(tokenRequestParams.generateEncodedForm());
     log.fine("Calling "+client.tokenRequestURI+" with "+tokenRequestParams);
+    
+    
     // Call credentialRequestURI
     spiralcraft.net.http.client.Client httpClient
       =new spiralcraft.net.http.client.Client();
+    if (logLevel.isFine())
+    {
+      httpClient.setLogLevel(Level.FINE);
+      httpClient.setDebugStream(true);
+    }
     Response response=
       httpClient.executeRequest
         ("POST"
@@ -187,19 +194,30 @@ public class Session
         ,"application/x-www-form-urlencoded"
         ,new ByteArrayResource(encodedTokenRequest)
         );
-    log.fine("Access Token Response "+response.toString());
-    try
-    {
-      AccessTokenResponse accessTokenResponse
-          =AccessTokenResponse.fromJSON(response.getContentAsString());
-      log.fine("From json "+accessTokenResponse);
-      temporary=false;
-      this.oauthToken=accessTokenResponse.accessToken;
-      
-          
+    if (logLevel.isFine())
+    { log.fine("Access Token Response "+response.toString());
     }
-    catch (ParseException x)
-    { throw new IOException("Error reading JSON response",x);
+    if (response.getStatus()!=200)
+    { log.fine("OAUTH2 error getting access token "+response.getStatus()+" "+response.getReason());
+    }
+    else
+    {
+      try
+      {
+        AccessTokenResponse accessTokenResponse
+            =AccessTokenResponse.fromJSON(response.getContentAsString());
+        if (logLevel.isFine())
+        { log.fine("From json "+accessTokenResponse);
+        }
+        temporary=false;
+        this.oauthToken=accessTokenResponse.accessToken;
+        
+            
+      }
+      catch (ParseException x)
+      { throw new IOException("Error reading JSON response",x);
+      }
+      postAuthenticate();
     }
     
     
@@ -280,7 +298,6 @@ public class Session
 //    { connection.disconnect();
 //    }
     
-    postAuthenticate();
     
   }
   
