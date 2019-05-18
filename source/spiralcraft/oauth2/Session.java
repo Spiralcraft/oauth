@@ -16,12 +16,8 @@ package spiralcraft.oauth2;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 
 import spiralcraft.util.RandomUtil;
@@ -46,9 +42,7 @@ public class Session
   protected static final ClassLog log
     =ClassLog.getInstance(Session.class);
  
-  private static final Charset ASCII=Charset.forName("ASCII");
   
-  @SuppressWarnings("unused")
   protected final Client client;
   private String oauthToken;
   @SuppressWarnings("unused")
@@ -394,7 +388,7 @@ public class Session
       headerMap.add(header);
       spiralcraft.net.http.client.Client httpClient
         =new spiralcraft.net.http.client.Client();
-      
+      httpClient.setLogLevel(logLevel);
       Response response=
         httpClient.executeRequest
           (verb
@@ -408,7 +402,7 @@ public class Session
       if (response.getStatus()>400)
       {           
         throw new URLAccessException
-          ("Connection returned remote error"
+          ("Connection returned remote error from URI: "+uri
           ,null
           ,new URLMessage
             (response.getContent().getInputStream()
