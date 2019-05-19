@@ -15,6 +15,19 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev7
+        </revision>
+        
+        <notes>
+          <scm:Note>Invalidate token URI is optional
+          </scm:Note>
+        </notes>
+        
+        <path>source/spiralcraft/oauth2/Session.java
+        </path>
+        
+      </scm:Change>
+      <scm:Change>
         <revision>-dev6
         </revision>
         
