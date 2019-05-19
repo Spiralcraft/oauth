@@ -508,7 +508,9 @@ public class Session
   public void invalidate()
     throws IOException
   { 
-    call("GET",client.tokenInvalidateURI,null);
+    if (client.tokenInvalidateURI!=null)
+    { call("GET",client.tokenInvalidateURI,null);
+    }
     clear();
   }
   
