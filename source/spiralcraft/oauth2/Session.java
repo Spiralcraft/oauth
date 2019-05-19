@@ -53,6 +53,7 @@ public class Session
   protected Level logLevel=Level.FINE;
   private String problem;
   protected String state=RandomUtil.generateString(20);
+  private URI callbackURI;
   
   protected Session(Client client)
   { 
@@ -99,6 +100,7 @@ public class Session
   {
     problem=null;
     temporary=true;
+    this.callbackURI=callbackURI;
     VariableMap credentialRequestParams
       =makeCredentialRequestParameters(callbackURI);
       
@@ -335,6 +337,15 @@ public class Session
   VariableMap makeTokenRequestParameters(String oauthCode,URI redirectURI)
   {
     VariableMap map=new VariableMap();
+    redirectURI=
+        redirectURI!=null
+        ?redirectURI
+        :callbackURI!=null
+        ?callbackURI
+        :client.redirectURI!=null
+        ?client.redirectURI
+        :redirectURI
+        ;
     if (redirectURI==null)
     { redirectURI=client.redirectURI;
     }
