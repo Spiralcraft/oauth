@@ -25,7 +25,6 @@ import spiralcraft.text.ParseException;
 import spiralcraft.util.string.StringConverter;
 import spiralcraft.vfs.Resource;
 import spiralcraft.vfs.task.Query;
-import spiralcraft.vfs.url.URLMessage;
 
 import spiralcraft.json.DataReader;
 import spiralcraft.json.Parser;
